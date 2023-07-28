@@ -1,0 +1,52 @@
+{{ block title }}
+    Decisions of the Employers
+{{ endblock }}
+{{ block content }}
+
+<p> Out of the {{C.num_employers}} employers that were confronted with the decision between you and your competitor shown before
+    the beginning of the main experiment,
+     <b> {{ hiring_decision_pro }} </b> employer(s) selected you and <b> {{ hiring_decision_con }} </b> employer(s) selected your competitor.
+    </p>
+
+<p>
+
+        {{ if hiring_decision_pro > hiring_decision_con }}
+        This means that you earn additionally {{ bonus_pre_hiring }} for being selected by more than half of the employers for the task.
+        {{ elif hiring_decision_pro < hiring_decision_con }}
+        Since you were selected by less than half of the employers, you will <b> not </b> receive a bonus for that. (Test: {{ bonus_pre_hiring }})
+        {{ elif hiring_decision_pro == hiring_decision_con }}
+        Since exactly half of the employers selected you, we determined randomly whether you receive a bonus or not with the result
+        of you getting {{ bonus_pre_hiring }}.
+        {{ endif }}
+    </p>
+
+    {{ next_button }}
+
+{{ endblock }}
+
+
+{{ block styles }}
+
+<style>
+
+.otree-timer {
+    display: none;
+}
+
+</style>
+
+{{ endblock }}
+
+{{ block scripts }}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds == 30) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
+{{ endblock }}

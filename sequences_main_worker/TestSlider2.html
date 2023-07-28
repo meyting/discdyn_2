@@ -1,0 +1,362 @@
+{{ block title }}
+    Set Your Target
+{{ endblock }}
+{{ block content }}
+
+<p>
+    You are now again asked to set your target score, i.e. the minimum number of sequences that you will correctly solve.
+</p>
+
+
+<div class="slidecontainer">
+    <input name="target_sequences_main" type="range" min="0" max="50" value="0" step="1" class="slidershown" id="myRange" list="tickmarks">
+    <div class="sliderticks">
+        <p><b>0</b></p>
+        <p><b>50</b></p>
+    </div>
+    <table style="width:100%">
+        <tr>
+              <th colspan="3"><div style="text-align: center; color:black; font-size:25px">Target-Score:</div></th>
+          </tr>
+        <tr>
+            <th colspan="3"><div style="text-align: center; color:black; font-size:25px"> <span id="target_sequences_main">0 </span> sequences </div></th>
+          </tr>
+   </table>
+</div>
+<br>
+<h5 align="center">For this chosen target you earn a bonus payment of <span style="color:#0d6efd">$</span><span style="font-weight:bold; color:#0d6efd" id="bonus_rounded">0 </span>
+       if you solve at least <span style="font-weight:bold; color:#0d6efd" id="target_score">0</span> sequences correctly.</h5>
+<br>
+<hr>
+<br>
+<p> Please click "next" to confirm your target score and proceed to the sequences task. </p>
+<br>
+    {{ next_button }}
+
+{{endblock}}
+
+{{ formfield_errors 'target_sequences_main' }}
+
+
+
+{{ block app_scripts }}
+<script>
+        var bonus_rounded = document.getElementById("bonus_rounded");
+        const bonusfactor = 0.05;
+        var output2 = document.getElementById("target_score");
+
+        var slider = document.getElementById("myRange");
+        var output = document.getElementById("target_sequences_main");
+        if(document.getElementById("target_sequences_main") != null){
+        output.innerHTML;
+        slider.oninput = function() {
+            output.innerHTML = parseFloat(this.value).toFixed(0);
+            bonus = this.value*bonusfactor;
+            console.log(this.value)
+            bonus_rounded.innerHTML = bonus.toFixed(2);
+            output2.innerHTML = this.value;
+            };
+        };
+
+
+const numInputs = document.querySelectorAll('input[type=number]')
+
+numInputs.forEach(function(input) {
+  input.addEventListener('change', function(e) {
+    if (e.target.value == '') {
+      e.target.value = 0
+    }
+  })
+})
+
+
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds == 30) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+{{ endblock }}
+
+{{ block app_styles }}
+
+<style>
+    .otree-timer {
+         display: none;
+    }
+
+input[type="radio"]{
+    cursor: pointer;
+    }
+
+    .slidecontainer {
+        width: 100%;
+        }
+
+    .slidershown {
+        -webkit-appearance: none;
+        width: 100%;
+        height: 15px;
+        border-radius: 5px;
+        background: #d3d3d3;
+        /*background: rgb(232,58,58);
+        background: linear-gradient(90deg, rgba(89,176,84,1)  25%,  rgba(229,93,93,1) 75%);*/
+        outline: none;
+        opacity: 0.7;
+         -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    .slidershown::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearance: none;
+        width: 25px;
+        height: 25px;
+        border-radius: 50%;
+        background: black;
+        cursor: pointer;
+        }
+
+    .rangelabelleft {
+        width: 10%;
+        font-size: 10px;
+        float: left;
+        margin-bottom:1%;
+        }
+
+    .rangelabelcenter {
+        text-align:center;
+        width: 10%;
+        margin-left:35%;
+        margin-right:35%;
+        font-size: 10px;
+        float:left;
+        margin-bottom:1%;
+        }
+
+    .rangelabelright {
+        width: 10%;
+        font-size: 10px;
+        float:right;
+        text-align: right;
+        margin-bottom:1%;
+        }
+
+    .sliderticks {
+        display: flex;
+        justify-content: space-between;
+        padding: 0 10px;
+        }
+
+    .sliderticks p {
+        position: relative;
+        display: flex;
+        justify-content: center;
+        text-align: center;
+        width: 1px;
+        background: #D3D3D3;
+        height: 10px;
+        line-height: 40px;
+        margin: 0 0 20px 0;
+        }
+
+    .input:focus {
+        background-color: #e6ff99;
+        }
+
+    .input{
+        width: 10%;
+        padding: 12px 20px;
+        margin: 8px 0;
+        box-sizing: border-box;
+        border: none;
+        background-color: #f9ffe6;
+        }
+</style>
+
+
+
+
+<!--
+.mover{
+  /* position: relative;
+  top: 20px;
+  left: 350px; */
+  position: absolute;
+  top: calc(var(--myVar) * 1px);
+  left: calc(var(--myVar) * 2px);
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.slider::-webkit-slider-runnable-track {
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.slider::-moz-range-track {
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.slider::-moz-range-progress {
+  height: 10px;
+  background-color: #4CAF50;
+  border-radius: 5px;
+}
+
+.slider::-webkit-slider-thumb::before {
+  content: attr(value);
+  position: absolute;
+  bottom: 30px;
+  left: -10px;
+  color: #fff;
+  background-color: #4CAF50;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  display: none;
+}
+
+.slider:hover::-webkit-slider-thumb::before {
+  display: block;
+}
+
+.slider::-webkit-slider-thumb:hover::before {
+  display: block;
+}
+
+.slider::-moz-range-thumb::before {
+  content: attr(value);
+  position: absolute;
+  bottom: 30px;
+  left: -10px;
+  color: #fff;
+  background-color: #4CAF50;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  display: none;
+}
+
+.slider:hover::-moz-range-thumb::before {
+  display: block;
+}
+
+.slider::-moz-range-thumb:hover::before {
+  display: block;
+}
+
+
+
+.simulador .contenedor {
+  padding: 25px 22px;
+}
+.simulador .contenedor .slider-container {
+  padding: 35px 0px;
+}
+.simulador .contenedor .slider-container .interno {
+  padding: 20px 0px;
+}
+.simulador .contenedor .slider-container .interno .slidecontainer {
+  width: 100%;
+  padding-top: 18px;
+}
+.simulador .contenedor .slider-container .interno .slidecontainer output {
+  font-family: 'museo700';
+  margin-bottom: 10px;
+  position: absolute;
+  padding: 1.2em;
+  background: transparent;
+  color: blue;
+  font-size: 30px;
+  font-weight: bold;
+}
+.simulador .contenedor .slider-container .interno .slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 2.5px;
+  background: #003664;
+  outline: none;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border: 0;
+}
+.simulador .contenedor .slider-container .interno .slider:hover {
+  opacity: 1;
+}
+.simulador .contenedor .slider-container .interno .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  border: 3.5px solid blue;
+}
+.simulador .contenedor .slider-container .interno .slider ::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  border: 3.5px solid blue;
+}
+
+
+.hidden {
+	display:none;
+}
+
+.infobox {
+    background-color:transparent;
+    }
+
+</style>
+
+-->
+
+{{ endblock }}

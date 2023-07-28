@@ -1,0 +1,35 @@
+{{ block title }}
+    Bonus Payment for the pre-experimental part
+{{ endblock }}
+{{ block content }}
+<p> As mentioned on the previous pages, you have the chance to earn a bonus payment for this pre-experimental part. The bonus depends on two factors: <br>
+    <ul>
+        <li> Below, you are asked to sepcify a target score for the task. If you reach at least this score, you get a fixed payment.
+        This payment increases with the amount of your chosen target score: </li>
+        <ul>
+            <li> The fixed payment you receive when achieving your target corresponds to the number of points times {{ C.bonusfactor}}. </li>
+            <li> Example: If you set yourself a goal of {{C.bonusexample_competition}}, the bonus you earn when solving
+                at least {{C.bonusexample_competition}} questions correctly, will be
+                {{C.bonusexample_competition}}* {{C.bonusfactor}} = {{C.bonusexample_comp_bonus}}. </li>
+        </ul>
+        <li> (Additionally, if you reach your target, you earn ... per correctly solved question?) </li>
+    <li> This implies, in order to maximize your payoff, you should estimate your score as precisely as possible and
+        try to solve as many questions as possible.</li>
+    <li> If you have read and understood these explanations, please click "Next" to go to the next page to set your own target.
+    </li>
+    </ul>
+</p>
+<table class="center">
+    <tr>
+        <td style="font-size:20px; width:70"> Now, please provide the number of points you want to set as your target score: </td>
+        <td> &nbsp;</td>
+        <td style="width:80px">
+            <input type="number" min="0" max="50" name="goal_sequences_before" id="goal_sequences_before" class="form-control" autofocus>
+        </td>
+    </tr>
+</table>
+<br>
+{{ formfield_errors 'goal_sequences_before' }}
+    {{ next_button }}
+
+{{ endblock }}

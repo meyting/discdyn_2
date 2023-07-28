@@ -1,0 +1,43 @@
+
+{{ block content }}
+<p>
+<table class="center">
+    <tr>
+        <td style="font-size:30px; width:70">
+            {{ if player.round_number == 1 }} {{ C.SEQUENCES_training1 }}
+            {{ elif player.round_number == 2}} {{ C.SEQUENCES_training2 }}
+            {{ elif player.round_number == 3}} {{ C.SEQUENCES_training3 }}
+            {{ endif}}
+        </td>
+        <td> &nbsp;</td>
+        <td style="width:55px">
+            <input type="number" min="0" name="input_sequences_training" id="input_sequences_training" class="form-control" autofocus>
+        </td>
+    </tr>
+</table>
+<br>
+<p>
+(Practice Question {{player.round_number}} of {{C.num_sequences_training}})
+</p>
+
+
+    {{ next_button }}
+
+{{ endblock }}
+
+{{ block styles }}
+<style type="text/css">
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.otree-timer {
+    width: 30%;
+    background-color: white;
+    border: none;
+    margin-left:0;
+    padding:0;
+   }
+
+</style>
+{{ endblock }}

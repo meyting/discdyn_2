@@ -1,0 +1,285 @@
+{{ block title }}
+    Test Slider
+{{ endblock }}
+{{ block content }}
+
+<hr>
+
+
+<div style="background-color:#ffffff; padding-left:25px">
+<table>
+    <tr>
+        <td>
+            <h5> Now, please move the slider to the number of points you want to set as your target score: </h5>
+        </td>
+    </tr>
+</table>
+    <br>
+<table style="width:100%">
+    <tr style="width:100%">
+        <td style="width:20%">
+            <h5> Target-Score: <span style="font-weight:bold"; id="target_score">0</span> </h5>
+        </td>
+        <td style="width:75%">
+            <input name="target_sequences_before" type="range" min="0" max="50" value="0" step="1" class="slider" id="range">
+            <div id="value_disp" class="mover" style="font-size:20px; font-weight:bold; --myVar: value_disp;"> <p>0</p></div>
+        </td>
+    </tr>
+</table>
+    <table style="width:100%">
+    <tr style="width:100%; font-size:20px">
+        <td style = "width: 21%">  </td>
+        <td style = "width: 9%"> 0 </td>
+        <td style = "width: 52%">  </td>
+        <td style = "width: 13%; align: right"> 50 </td>
+        <td style = "width: 5%">  </td>
+    </tr>
+    </table>
+    <br>
+   <h5 align="left">For this chosen target you earn a bonus payment of <span style="font-weight:bold"; id="bonus_rounded"> 0 </span> $
+       if you reach <b> at least </b> <span style="font-weight:bold"; id="target_score_disp">0</span> <b> points </b> in the sequences task.</h5>
+    <br>
+</div>
+
+<br> <br>
+<hr>
+
+
+<div class="simulador">
+    <div class="contenedor">
+        <h5 class="simula"> Choose your target: </h5>
+        <div class="slider-container">
+            <div class="interno">
+                <div class="slidecontainer">
+                    <input type="range" min="0" max="50" value="0" class="slider" id="rango" oninput="outputUpdate(val)">
+                    <output for="rango" id="valor"></output>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<h5> Target-Score: <span style="font-weight:bold"; id="target_score">0</span> </h5>
+
+
+<p> Please click "next" to confirm your chosen target and proceed to the sequences task. </p>
+
+    {{ next_button }}
+
+{{endblock}}
+
+{{ formfield_errors 'target_sequences_before' }}
+
+{{ block app_scripts }}
+<script>
+
+        var slider1 = document.getElementById("range");
+        var output1 = document.getElementById("target_score");
+        var output2 = document.getElementById("target_score_disp");
+        var output3 = document.getElementById("value_disp");
+        var bonus_rounded = document.getElementById("bonus_rounded");
+        const bonusfactor = 0.05;
+
+        slider1.oninput = function() {
+             output1.innerHTML = this.value;
+             output2.innerHTML = this.value;
+             output3.innerHTML = this.value;
+             bonus = this.value*bonusfactor;
+             bonus_rounded.innerHTML = bonus.toFixed(2);
+             };
+
+
+    var slider = document.getElementById('rango');
+
+    slider.oninput = function() {
+    var output = document.getElementById('valor');
+    output.innerHTML = this.value;
+    var sliderWidth = this.getBoundingClientRect().width;
+    var outputWidth = output.getBoundingClientRect().width;
+    // var offset = this.value / (this.max - this.min) * sliderWidth - outputWidth / 2;
+    var offset = 260 + this.value*17.2;
+    output.setAttribute('style', 'left: ' + offset + 'px');
+    output1.innerHTML = this.value;
+    output2.innerHTML = this.value;
+    // output3.innerHTML = this.value;
+    bonus = this.value*bonusfactor;
+    bonus_rounded.innerHTML = bonus.toFixed(2);
+}
+
+slider.oninput();
+
+
+</script>
+{{ endblock }}
+
+{{ block app_styles }}
+<style>
+
+.mover{
+  /* position: relative;
+  top: 20px;
+  left: 350px; */
+  position: absolute;
+  top: calc(var(--myVar) * 1px);
+  left: calc(var(--myVar) * 2px);
+}
+
+.slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  outline: none;
+  padding: 0;
+  margin: 0;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 20px;
+  height: 20px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.slider::-moz-range-thumb {
+  width: 20px;
+  height: 20px;
+  background-color: #4CAF50;
+  border-radius: 50%;
+  cursor: pointer;
+  position: relative;
+  z-index: 2;
+}
+
+.slider::-webkit-slider-runnable-track {
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.slider::-moz-range-track {
+  height: 10px;
+  background-color: #ddd;
+  border-radius: 5px;
+  position: relative;
+  z-index: 1;
+}
+
+.slider::-moz-range-progress {
+  height: 10px;
+  background-color: #4CAF50;
+  border-radius: 5px;
+}
+
+.slider::-webkit-slider-thumb::before {
+  content: attr(value);
+  position: absolute;
+  bottom: 30px;
+  left: -10px;
+  color: #fff;
+  background-color: #4CAF50;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  display: none;
+}
+
+.slider:hover::-webkit-slider-thumb::before {
+  display: block;
+}
+
+.slider::-webkit-slider-thumb:hover::before {
+  display: block;
+}
+
+.slider::-moz-range-thumb::before {
+  content: attr(value);
+  position: absolute;
+  bottom: 30px;
+  left: -10px;
+  color: #fff;
+  background-color: #4CAF50;
+  padding: 5px;
+  border-radius: 5px;
+  font-size: 14px;
+  white-space: nowrap;
+  display: none;
+}
+
+.slider:hover::-moz-range-thumb::before {
+  display: block;
+}
+
+.slider::-moz-range-thumb:hover::before {
+  display: block;
+}
+
+
+
+.simulador .contenedor {
+  padding: 25px 22px;
+}
+.simulador .contenedor .slider-container {
+  padding: 35px 0px;
+}
+.simulador .contenedor .slider-container .interno {
+  padding: 20px 0px;
+}
+.simulador .contenedor .slider-container .interno .slidecontainer {
+  width: 100%;
+  padding-top: 18px;
+}
+.simulador .contenedor .slider-container .interno .slidecontainer output {
+  font-family: 'museo700';
+  margin-bottom: 10px;
+  position: absolute;
+  padding: .95em;
+  background: transparent;
+  color: blue;
+  font-size: 25px;
+}
+.simulador .contenedor .slider-container .interno .slider {
+  -webkit-appearance: none;
+  width: 100%;
+  height: 5px;
+  border-radius: 2.5px;
+  background: #003664;
+  outline: none;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  border: 0;
+}
+.simulador .contenedor .slider-container .interno .slider:hover {
+  opacity: 1;
+}
+.simulador .contenedor .slider-container .interno .slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  border: 3.5px solid blue;
+}
+.simulador .contenedor .slider-container .interno .slider ::-moz-range-thumb {
+  width: 25px;
+  height: 25px;
+  border-radius: 50%;
+  background: #fff;
+  cursor: pointer;
+  border: 3.5px solid blue;
+}
+
+
+
+</style>
+{{ endblock }}

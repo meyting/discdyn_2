@@ -1,0 +1,64 @@
+{{ block title }}
+    Results Practice Round
+{{ endblock }}
+
+{{ block content }}
+<p> You have solved {{participant.total_points_sequence_training}} of the {{C.num_sequences_training}}
+    practice sequences correctly. </p>
+
+<!--
+<p style="font-size:20px"> Solutions Practice Round: </p>
+<table style="text-align:center;" class="table">
+     <thead>
+    <tr>
+       <th> Sequence: </th>
+        <th> </th>
+        <th> Correct answer: </th>
+     </tr>
+    </thead>
+    <tr>
+        <td> {{C.SEQUENCES_training1}}_ </td>
+        <td>  </td>
+        <td> {{C.SOLUTIONS_training1}} </td>
+    </tr>
+    <tr>
+        <td> {{C.SEQUENCES_training2}}_ </td>
+        <td>  </td>
+        <td> {{C.SOLUTIONS_training2}} </td>
+    </tr>
+    <tr>
+        <td> {{C.SEQUENCES_training3}}_ </td>
+        <td>  </td>
+        <td> {{C.SOLUTIONS_training3}} </td>
+    </tr>
+</table>
+</p>
+
+<p style="color:red"> [Lösungen/Fehler anzeigen?] <br>
+    [Auf der Seite schon die nächsten Instructions?]
+</p>
+-->
+<p> </p>
+    {{ next_button }}
+{{ endblock }}
+
+{{ block styles }}
+<style type="text/css">
+
+th, td {
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 25px;
+  padding-right: 25px;
+  font-size: 20px;
+}
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+</style>
+{{ endblock }}
+
+

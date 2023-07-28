@@ -1,0 +1,38 @@
+
+{{ block content }}
+<p>
+<table class="center">
+    <tr>
+        <td style="font-size:30px; width:70"> {{ subsession.question_seq_main }} </td>
+        <td> &nbsp;</td>
+        <td style="width:55px">
+            <input type="number" min="0" name="input_seq_main" id="input_seq_main" class="form-control" autofocus>
+        </td>
+    </tr>
+</table>
+<br>
+<p>
+(Question {{ player.question_num_seq_main }} of {{ C.NUM_ROUNDS }})
+</p>
+
+
+    {{ next_button }}
+
+{{ endblock }}
+
+{{ block styles }}
+<style type="text/css">
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+.otree-timer {
+    width: 30%;
+    background-color: white;
+    border: none;
+    margin-left:0;
+    padding:0;
+   }
+
+</style>
+{{ endblock }}

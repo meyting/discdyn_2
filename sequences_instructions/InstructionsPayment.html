@@ -1,0 +1,280 @@
+{{ block title }}
+    Bonus Payment for the Pre-Experimental Part
+{{ endblock }}
+{{ block content }}
+<p> As mentioned on the previous pages, you have the chance to earn a bonus payment for this pre-task: <br>
+Below, you are asked to specify a target score for the sequences task. If you reach at least this score, you get a fixed payment.
+    This payment increases with the amount of your chosen target score:
+    The fixed payment you receive when achieving your target corresponds to the number of points times {{ C.bonusfactor}}.
+    Example: If you set yourself a goal of {{C.bonusexample1}} points, the bonus you earn when solving
+    at least {{C.bonusexample1}} questions correctly, will be
+    {{C.bonusexample1}}* {{C.bonusfactor}} = {{C.bonusexample1_comp_bonus}}.
+
+    <!-- <br> <br> [Additionally, if you reach your target, you earn ... per correctly solved question(?)] <br> -->
+</p>
+
+<p id="container">
+<b class="openbox" id="openbox">
+     <button type="button" class="button"> Next </button>
+</b> </p>
+<div class="infobox hidden" id="infobox">
+<hr>
+<div style="background-color:#ffffff; padding-left:25px">
+<table>
+    <tr>
+        <td>
+            <h5> Now, please move the slider to the number of points you want to set as your target score: </h5>
+        </td>
+    </tr>
+</table>
+    <br>
+<table style="width:100%">
+    <tr style="width:100%">
+        <td style="width:20%">
+            <h5> Target-Score: <span style="font-weight:bold"; id="target_score">0</span> </h5>
+        </td>
+        <td style="width:75%">
+            <input name="target_sequences_before" type="range" min="0" max="50" value="0" step="1" class="slidershown" id="target1">
+        </td>
+        <!--
+        <td style="width:10%">
+            <h5> <span style="color:#33B5FF;font-weight:bold"; id="target_score">0</span> Points </h5>
+        </td> -->
+    </tr>
+</table>
+    <table style="width:100%">
+    <tr style="width:100%; font-size:20px">
+        <td style = "width: 21%">  </td>
+        <td style = "width: 9%"> 0 </td>
+        <td style = "width: 52%">  </td>
+        <td style = "width: 13%; align: right"> 50 </td>
+        <td style = "width: 5%">  </td>
+    </tr>
+    </table>
+    <br>
+   <h5 align="left">For this chosen target you earn a bonus payment of <span style="font-weight:bold"; id="bonus_rounded"> 0 </span> $
+       if you reach <b> at least </b> <span style="font-weight:bold"; id="target_score_disp">0</span> <b> points </b> in the sequences task.</h5>
+    <br>
+</div>
+
+<p> Please click "next" to confirm your chosen target and proceed to the sequences task. </p>
+
+    {{ next_button }}
+</div>
+
+{{endblock}}
+
+{{ formfield_errors 'target_sequences_before' }}
+
+{{ block app_scripts }}
+
+<script src="{% static 'prev_next_button.js' %}"></script>
+<script src="https://kit.fontawesome.com/291f047144.js" crossorigin="anonymous"></script>
+
+<script>
+    document.getElementById("openbox").addEventListener("click", function(){
+    document.getElementById("infobox").classList.remove("hidden");
+    document.getElementById("container").classList.add("hidden");
+        });
+</script>
+
+<script>
+//const slider = document.querySelector('.slidershown');
+
+ //     slider.addEventListener('input', (event) => {
+   //     const value = event.target.value;
+     //   const percent = ((value - event.target.min) / (event.target.max - event.target.min)) * 100;
+      //  const color = `linear-gradient(to right, red ${percent}%, green ${percent}%)`;
+       // slider.style.background = color;
+      //});
+
+        var slider1 = document.getElementById("target1");
+        var output1 = document.getElementById("target_score");
+        var output2 = document.getElementById("target_score_disp");
+        var bonus_rounded = document.getElementById("bonus_rounded");
+        const bonusfactor = 0.05;
+        // doesn't work to  use C.bonusfactor here
+        // const bonusfactor = {{C.competition_bonusfactor}};
+        // var targetInput = document.getElementById("target_sequences_before");
+
+        slider1.oninput = function() {
+             output1.innerHTML = this.value;
+             output2.innerHTML = this.value;
+             bonus = this.value*bonusfactor;
+             bonus_rounded.innerHTML = bonus.toFixed(2);
+             };
+
+//if (targetInput != null) {
+//  output1.innerHTML;
+ // slider1.oninput = function() {
+ //   var targetValue = parseFloat(this.value).toFixed(0);
+//    output1.innerHTML = targetValue;
+//    targetInput.value = targetValue; // set the value of the numeric input field to the target score
+//  };
+//};
+
+</script>
+{{ endblock }}
+
+{{ block app_styles }}
+<style>
+
+    .slidershown {
+       -webkit-appearance: none;
+        width: 80%;
+        height: 100%;
+        border-radius: 5px;
+        /* background: #dae0e5; */
+        background: grey;
+        outline: none;
+        opacity: 0.7;
+         -webkit-transition: .2s;
+        transition: opacity .2s;
+        }
+
+    .slidershown::-webkit-slider-thumb {
+        -webkit-appearance: none;
+        appearence: none;
+        width: 20px;
+        height: 20px;
+        border-radius: 50%;
+        background: black;
+        /* background: var(--slider-thumb-color, #fff); */
+        cursor: pointer;
+        border: none;
+        position: relative;
+        }
+
+     .slidershown::-webkit-slider-runnable-track {
+        width: 100%;
+        height: 15px;
+        cursor: pointer;
+        /* background: linear-gradient(to right, red, green); */
+        /* background: linear-gradient(to right, var(--slider-background-left), var(--slider-background-right)); */
+        background: green;
+        border-radius: 5px;
+        border: none;
+        }
+
+       }
+/** FF*/
+input[type="range"]::-moz-range-progress {
+  background-color: #43e5f7;
+}
+input[type="range"]::-moz-range-track {
+  background-color: #9a905d;
+}
+/*Chrome*/
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    input[type='range'] {
+      overflow: hidden;
+      width: 80%;
+      -webkit-appearance: none;
+      background-color: #9a905d;
+    }
+
+    input[type='range']::-webkit-slider-runnable-track {
+      height: 20px;
+      -webkit-appearance: none;
+      color: #13bba4;
+      margin-top: -1px;
+    }
+
+    input[type='range']::-webkit-slider-thumb {
+      width: 20px;
+      -webkit-appearance: none;
+      - appearance: none;
+      border-radius: 50%;
+      height: 20px;
+      /* cursor: ew-resize; */
+      cursor: pointer;
+      background: black;
+      box-shadow: -300px 0 0 300px #f51120;
+      position: relative;
+    }
+/* IE*/
+input[type="range"]::-ms-fill-lower {
+  background-color: #43e5f7;
+}
+input[type="range"]::-ms-fill-upper {
+  background-color: #9a905d;
+}
+
+.hidden {
+	display:none;
+}
+
+.infobox {
+    background-color:#f0f0f5
+    }
+
+.openbox {
+        cursor: pointer;
+		margin: 15px 0;
+		  }
+
+.button{
+    background-color: #3393FF;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    padding: 7px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+
+.info {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+        }
+
+    .info .infotext {
+        visibility: hidden;
+        width: 500px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        top: -50px;
+        left: 150%;
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 0.9rem;
+        font-weight: 400;
+        line-height:130%
+    }
+
+    .info .infotext::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent black transparent transparent;
+
+        }
+
+    .info:hover .infotext {
+        visibility: visible;
+        }
+
+
+</style>
+{{ endblock }}

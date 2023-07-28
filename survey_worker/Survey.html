@@ -1,0 +1,69 @@
+{{ block title }}
+    Final Questions
+{{ endblock }}
+{{ block content }}
+
+    {{ formfield 'education' }}
+    {{ formfield 'party' }}
+<hr>
+    {{ formfield 'purpose'}}
+    {{ formfield 'discrimination'}}
+    {{ formfield 'reason_hiring' }}
+<hr>
+    {{ formfield 'gpa_hs' }}
+    {{ formfield 'gpa_college' }}
+<hr>
+<p> Are you are person that likes or rather tries to avoid risks? I ... </p>
+<div style="display: flex">
+        {{ for choice in form.risk_aversion }}
+        <div style="flex: 1; text-align: center">
+            {{ choice }}
+            <br>
+            <span style="text-align: center">{{ choice.label }}</span>
+        </div>
+        {{ endfor }}
+</div>
+{{ formfield_errors 'risk_aversion' }}
+<br>
+<p> Are you are person that likes or rather tries to avoid competitive situations? I ... </p>
+<div style="display: flex">
+        {{ for choice in form.competition_aversion }}
+        <div style="flex: 1; text-align: center">
+            {{ choice }}
+            <br>
+            <span style="text-align: center">{{ choice.label }}</span>
+        </div>
+        {{ endfor }}
+</div>
+{{ formfield_errors 'competition_aversion' }}
+<br>
+<br>
+    {{ next_button }}
+
+{{ endblock }}
+
+
+{{ block styles }}
+
+<style>
+.otree-timer {
+    display: none;
+}
+
+</style>
+
+{{ endblock }}
+
+{{ block scripts }}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds == 30) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
+{{ endblock }}

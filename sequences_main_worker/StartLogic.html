@@ -1,0 +1,33 @@
+{{ block title }}
+    Prepare for the task
+{{ endblock }}
+
+{{ block content }}
+    <p>
+        Clicking "Next" will start the task.
+        You will then again have {{C.time_sequence_mins}} minutes to complete a maximum of {{C.NUM_ROUNDS}} sequences.
+    </p>
+    {{ next_button }}
+{{ endblock }}
+
+{{ block styles }}
+<style>
+.otree-timer {
+    display: none;
+}
+</style>
+{{ endblock }}
+
+{{ block scripts }}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds == 30) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
+{{ endblock }}

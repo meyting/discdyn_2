@@ -1,0 +1,66 @@
+{{ block title }}
+    Part I: Instructions
+{{ endblock }}
+{{ block content }}
+<br>
+    <h5> <b> Your Task: </b> </h5>
+    <p>
+        In this part you are asked to complete sequences of numbers.
+        In particular, you have {{C.time_sequence_mins}} minutes, to solve as many sequences as possible.
+        In order to find the missing number of a sequence, you need to figure out the pattern according to which the number sequence is constructed.
+        The task ends either after {{C.time_sequence_mins}} minutes or after you have completed all {{C.num_sequences_task}} sequences.
+    </p>
+    <p style="font-size:18px;"> <u> Example: </u>  </p>
+<table class="center">
+    <tr>
+        <td style="font-size:30px; width:70"> 9 , 8 , 7 , 6 ,  </td>
+        <td>&nbsp;</td>
+        <td style="width:50px">
+            <input type="number" min="0" name="input_sequence" id="input_sequence" class="form-control" readonly>
+        </td>
+    </tr>
+</table>
+<br>
+    <p>
+        In this example, the rule according to which the sequence of numbers is constructed is to subtract 1 from the previous number in the sequence.
+        Therefore, the correct answer would be "5".
+    </p>
+    <p>
+        You can always skip a sequence by clicking on "Next". In that case you will be directed to the next sequence.
+        Please note that you can never go back to a previous question.
+        Instead of clicking "Next" you can also press "enter" to submit your answer and move on to the next sequence.
+    </p>
+    <h5> <b> Your Bonus Payment: </b> </h5>
+    <p>
+        The bonus payment for the task depends on a self-set target score as well as your performance in this task.
+        Before the task starts, you are asked to set yourself a target score (i.e. how many sequences you will solve correctly) between 0 and {{C.num_sequences_task}}.
+        You will afterwards receive a bonus payment that corresponds to your target score times {{ C.bonusfactor }}, but only if you actually reach that target, i.e., if you solve at least as many sequences correctly as you have specified as your target before.
+        This means, the higher you set your target, the higher is your possible bonus payment.
+        However, setting a high target also increases the likelihood that you do not reach your target and hence earn no bonus payment at all.
+    </p>
+    <p>
+        <b>Three Examples:</b><br>
+        a) You set a target score of {{ C.bonusexample1 }} and you manage to solve 15 sequences correctly: You get a bonus of {{ C.bonusexample1 }} * {{ C.bonusfactor }} = {{ C.bonusexample1_comp_bonus }}. <br>
+        b) You set a target score of {{ C.bonusexample2 }} and you manage to solve 15 sequences correctly: You get a no bonus.<br>
+        c) You set a target score of {{ C.bonusexample2 }} and you manage to solve 45 sequences correctly: You get a bonus of {{ C.bonusexample2 }} * {{ C.bonusfactor }} = {{ C.bonusexample2_comp_bonus }}.
+
+    </p>
+
+<p>
+    On the next page, you will be provided with a short trainings phase to get to know the task. In this practice round you have {{C.time_sequences_training}} seconds
+    to complete a maximum of {{C.num_sequences_training}} sequences. The result of the trainings phase does not influence your payment.
+    Afterwards you will get more information about the bonus payment for the task and will be asked to specify your self-set target score.
+</p>
+<br>
+
+{{ next_button }}
+{{ endblock }}
+
+{{ block styles }}
+<style type="text/css">
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+{{ endblock }}

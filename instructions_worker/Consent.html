@@ -1,0 +1,173 @@
+
+{{ block title }}
+<div>
+    Welcome!
+<img class="logo" src="{% static 'jgu_logo.jpg' %}" alt="logo of University Mainz">
+</div>
+{{ endblock %}
+
+{{ block content }}
+
+<hr>
+<p><i>Please read the following explanations carefully.</i></p>
+<hr>
+<h5><u>Introduction</u></h5>
+<p>
+    Thank you for participating in our study, which is conducted by the Johannes Gutenberg University Mainz.
+    The objective of this study is to collect information for research on economic decision-making.
+</p>
+<h5><u>Data</u></h5>
+<p>
+    Before you start, we would like to ask you for your consent for participation.
+    You may withdraw your consent at any time by closing this survey/tab.
+    Once you have withdrawn your consent, your personal data will no longer be used.
+    All your data is anonymous, so that your responses cannot be associated with your person.
+    The University Mainz is committed to protecting your privacy.
+<!--
+    The University of Amsterdam has a privacy statement, which can be read
+    <a href="https://www.uva.nl/en/home/disclaimers/privacy.html">here</a>.
+-->
+</p>
+<p>
+    If you have any questions about this study, desire additional information, or wish to withdraw your consent, please get in touch with the researcher via Prolific.
+    If you have read this information and have decided to participate in this project, please understand that your participation is voluntary and that you have the right to discontinue participation at any time without penalty.
+    In this case, you will not receive a participation fee.
+    Your individual privacy will be maintained in all published and written data resulting from the study.
+</p>
+<p>
+    All data that you enter in this survey will be treated anonymously and will solely be used for academic research.
+    Neither the researcher nor anyone else will be able to identify you from the answers that you give in this survey.
+    If you would like to participate, mark the box below to confirm your decision to participate and consent to the data being used as described above.
+</p>
+
+<label for="consent"><b>I consent to participating in this study:</b></label>
+&nbsp;
+<input type="checkbox" name="consent" id="consent">
+{{ formfield_errors 'consent' }}
+
+<hr>
+
+    {% next_button %}
+
+{% endblock %}
+
+
+{% block styles %}
+<style>
+.logo {
+    width:25%;
+    margin-left: 55%;
+   }
+
+    #consent:hover{
+        cursor: pointer;
+        }
+
+input[type=checkbox]
+{
+  /* Double-sized Checkboxes */
+  -ms-transform: scale(1.5); /* IE */
+  -moz-transform: scale(1.5); /* FF */
+  -webkit-transform: scale(1.5); /* Safari and Chrome */
+  -o-transform: scale(1.5); /* Opera */
+  transform: scale(1.5);
+  padding: 10px;
+}
+
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.9); /* Black w/ opacity */
+        }
+
+    #trigger:hover{
+        cursor: pointer;
+        }
+
+    .modal-content {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        }
+
+    #caption {
+        margin: auto;
+        display: block;
+        width: 80%;
+        max-width: 700px;
+        text-align: center;
+        color: #ccc;
+        padding: 10px 0;
+        height: 150px;
+        }
+
+    .modal-content, #caption {
+        animation-name: zoom;
+        animation-duration: 0.6s;
+        }
+
+    @keyframes zoom {
+        from {transform:scale(0)}
+        to {transform:scale(1)}
+        }
+
+    .close {
+        position: absolute;
+        top: 15px;
+        right: 35px;
+        color: #f1f1f1;
+        font-size: 40px;
+        font-weight: bold;
+        transition: 0.3s;
+        }
+
+    .close:hover,
+    .close:focus {
+        color: #bbb;
+        text-decoration: none;
+        cursor: pointer;
+        }
+
+    @media only screen and (max-width: 700px){
+    .modal-content {
+        width: 100%;
+        }
+    }
+</style>
+{% endblock %}
+
+{% block scripts %}
+<script>
+// SCREENSHOT FOR sequence/MATH TEST
+// Get the modal
+var modal = document.getElementById("modal");
+
+// Get the image and insert it inside the modal - use its "alt" text as a caption
+var trigger = document.getElementById("trigger");
+var modalImg = document.getElementById("img");
+var captionText = document.getElementById("caption");
+trigger.onclick = function(){
+  modal.style.display = "block";
+  captionText.innerHTML = modalImg.alt;
+};
+
+// Get the <span> element that closes the modal
+var span = document.getElementById("close");
+
+// When the user clicks on <span> (x), close the modal
+span.onclick = function() {
+  modal.style.display = "none";
+};
+
+</script>
+
+{% endblock %}

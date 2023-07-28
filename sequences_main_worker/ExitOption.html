@@ -1,0 +1,52 @@
+{{ block title }}
+Hiring Decisions
+{{ endblock }}
+
+{{ block content }}
+<p> The results of the sequences task you have just completed can be used for another round of hiring decisions.
+    Your and your opponent's performance will then be displayed to the same employers as before, so they can make another hiring decision between you and your opponent
+    based on that additional information.
+</p>
+
+<p>
+     As in Part I, you can earn money through that decision.
+     You will receive a bonus payment of {{C.bonushired}} if the majority of the employers selects you in this second selection round. This means that
+     you get the bonus if more than {{C.bonus_threshold}} employers select you. If exactly {{C.bonus_threshold}} of the {{C.number_employers}}
+     employers hire you, whether or not you get the bonus will be decided by a virtual coin flip.
+</p>
+
+<p> In case you do not want to participate in another hiring decision, we give you the option to not participate.
+    Choosing that option means that the employers in the hiring decision will <b> not </b> see your profile and score and will
+    make no decision about whether to select you or your opponent.
+    Thus, you can also not be hired and therefore not receive any bonus money for the hiring decision.
+    (If you decided to drop out and your opponent decides to join this second round of hiring, your opponent will get the bonus payment.
+    If they also decide to drop out, nobody gets a bonus payment.)
+    Of course, for the sequences task you just performed, you will still get the bonus payment according to the explained mechanism.
+</p>
+{{ formfields }}
+{{ next_button }}
+{{ endblock }}
+
+
+
+{{ block styles }}
+<style>
+.otree-timer {
+    display: none;
+}
+</style>
+{{ endblock }}
+
+{{ block scripts }}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds == 30) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
+{{ endblock }}

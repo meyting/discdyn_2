@@ -1,0 +1,77 @@
+{{ block title }}
+    Part I/ Pre-Task: Instructions
+{{ endblock }}
+{{ block content }}
+<br>
+    <h5> <b> Task: </b> </h5>
+    <p>
+        In the first part/ before the main part of the experiment starts, you are asked to answer up to {{ C.NUM_ROUNDS }}
+        questions consisting of a sequences of numbers within {{C.time_sequence_mins}} minutes.
+        In order to find the missing number of a sequence, you need to figure out the pattern according to which the number sequence is constructed.
+        The task ends either after {{C.time_sequence_mins}} minutes or after you have completed all {{C.NUM_ROUNDS}} sequences.
+    </p>
+    <p style="font-size:18px;"> <u> Example: </u>  </p>
+<table class="center">
+    <tr>
+        <td style="font-size:30px; width:70"> 9 , 8 , 7 , 6 ,  </td>
+        <td>&nbsp;</td>
+        <td style="width:50px">
+            <input type="number" min="0" name="input_sequence" id="input_sequence" class="form-control" readonly>
+        </td>
+    </tr>
+</table>
+<br>
+    <p>
+        In this example, the rule according to which the sequence of numbers is constructed is to subtract 1 from the previous number in the sequence.
+        Therefore, the correct answer would be "5".
+    </p>
+    <p>
+        You can always skip a sequence by clicking on "Next". In that case you will be directed to the next sequence.
+        Please note that you can never go back to a previous question.
+        Instead of clicking "Next" you can also press "enter" to submit your answer and move on to the next sequence.
+    </p>
+    <h5> <b> Payment: </b> </h5>
+    <p>
+        Your performance in this task determines your bonus payment for part I.
+    </p>
+    <p>
+        The bonus payment for the task depends on a self-set target number of points. Before the task starts, you
+        are asked to set yourself a target score between 0 and {{C.NUM_ROUNDS}}.
+        You will afterwards receive a bonuspayment depending on the amount of that target score but only if you solve at least
+        as many questions correctly as you have specified before.
+    </p>
+
+    <p> On the next pages, you will get more information about the bonus payment and will be asked to specify your self-set
+        "target" score. </p>
+    <br>
+
+<p> On the next page, you can try the task in a short training phase. In this practice round you have {{C.time_sequences_training}} minute
+    to complete {{C.num_sequences_training}} sequences. The result of the training phase does not influence your payment. </p>
+</p>
+
+{{ next_button }}
+{{ endblock }}
+
+{{ block styles }}
+<style type="text/css">
+.center {
+  margin-left: auto;
+  margin-right: auto;
+}
+</style>
+{{ endblock }}
+
+/* test dropout
+{{ block scripts }}
+<script>
+      window.onbeforeunload = function() {
+        return "Are you sure you want to leave?";
+      };
+</script>
+
+<script>
+    window.addEventListener('beforeunload', function(event) {
+    event.returnValue = 'Ihre individuelle Fehlermeldung ...';
+});
+</script>
+{{ endblock }}

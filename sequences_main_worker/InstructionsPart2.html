@@ -1,0 +1,54 @@
+{{ block title }}
+    Part II - Instructions
+{{ endblock }}
+{{ block content }}
+<h5> Your Task: </h5>
+<p>
+    You are now asked to complete another sequences task. The task is similar to the one in Part I.
+    You will again have {{C.time_sequence_mins}} minutes to complete {{C.NUM_ROUNDS}} sequences. The sequences are at the same
+    difficulty level as the ones in Part I.
+</p>
+<!-- <p> The employers that have made the selection decision between you and the other worker in the first stage of the other experiment
+    will afterwards be informed about your
+    and the other worker's performance in the upcoming sequences task. Based on that information, they decide again
+    whether to hire you or the other worker. They will receive money if they choose the worker with the higher score.
+</p>
+-->
+<h5> Your Bonus Payment: </h5>
+<p> As in the Part I, you will again have the opportunity to earn a bonus payment.
+    The bonus will be determined by the same mechanism as in the Part I. Thus, you will again be asked to set a target number of points
+    and get a bonus payment depending on the target score and whether or not reach or exceed it.  </p>
+</p>
+<!--
+<h5> Option: </h5>
+<p> Before the next sequences task starts, you have the opportunity to not participate in the second hiring decision.
+    Choosing the option to not participate in the hiring decision means that you do the sequences task regularily and receive bonus money according
+    to the explained mechanism. In the hiring decision afterwards, however, the employers will <b> not </b> see your profile and score. Thus,
+    you can also not be hired and therefore not receive any bonus money for the hiring decision.
+</p>
+-->
+    {{ next_button }}
+
+{{ endblock }}
+
+{{ block styles }}
+<style>
+.otree-timer {
+    display: none;
+}
+</style>
+{{ endblock }}
+
+{{ block scripts }}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds == 30) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
+{{ endblock }}

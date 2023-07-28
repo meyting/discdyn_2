@@ -1,0 +1,110 @@
+{{ block title }}
+    Results and Bonus Payment
+{{ endblock }}
+{{ block content }}
+<table width="60%" style="font-weight:bold; font-size:18px;" class="table">
+    <tr>
+        <td> Result sequences Part I: </td>
+        <td> {{total_points_sequence}} </td>
+    </tr>
+    <tr>
+        <td> Target sequences Part I: </td>
+        <td> {{target_sequences_before}} </td>
+    </tr>
+    <tr>
+        {{ if total_points_sequence >= target_sequences_before }}
+            <td> Target reached </td>
+             <td style="color:green; font-weight:bold"> &#10003; </td>
+        {{ else }}
+            <td> Target not reached </td>
+            <td style="color:red; font-weight:bold;"> x </td>
+            {{ endif }}
+    </tr>
+    <tr class="trthin">
+        <td> Bonus sequences Part I: </td>
+        <td> {{bonus_sequences_before}} </td>
+    <tr>
+    <tr> <td> </td> <td> </td></tr>
+    <tr>
+        <td> Bonus selection by employers: </td>
+        <td> {{ bonus_pre_hiring }} </td>
+    </tr>
+    <tr> <td> </td> <td> </td></tr>
+    <tr>
+        <td> Result sequences Part II: </td>
+        <td> {{total_points_seq_main}} </td>
+    </tr>
+    <tr>
+        <td> Target sequences Part II: </td>
+        <td> {{target_sequences_main}} </td>
+    </tr>
+    <tr>
+        {{ if total_points_seq_main >= target_sequences_main }}
+            <td> Target reached </td>
+             <td style="color:green; font-weight:bold"> &#10003; </td>
+        {{ else }}
+            <td> Target not reached </td>
+            <td style="color:red; font-weight:bold;"> x </td>
+            {{ endif }}
+    </tr>
+    <tr class="trthin">
+        <td> Bonus Sequences Part II: </td>
+        <td> {{bonus_sequences_main}} </td>
+    </tr>
+    <tr class="trthick">
+        <td> Total Bonus: </td>
+        <td> <u> {{total_bonus_seq}} </u> </td>
+    </tr>
+</table>
+
+{{ if exit_option == "continue" }}
+<p>
+    Once the employers have made their second hiring decision, you will be paid the bonus shown above along with the potential additional bonus from that second round of selection decisions.
+</p>
+{{ endif }}
+<br>
+<p>
+    Once the employers have made their second hiring decision, you will be paid the bonus shown above along with the potential additional bonus from that second round of selection decisions.
+</p>
+<p>
+    <b>Important:</b> Please click "<a href="https://app.prolific.co/submissions/complete?cc=5CFD190D"><b>here</b></a>" to return to Prolific.
+</p>
+
+{{ endblock }}
+
+{{ block styles }}
+<style type="text/css">
+
+table {
+  border: 1px solid black;
+  border-collapse: collapse;
+}
+
+table .trthin {
+  border-top: 2px solid black;
+}
+
+table .trthick {
+  border-top: 3px solid black;
+}
+
+.otree-timer {
+    display: none;
+}
+</style>
+{{ endblock }}
+
+
+{{ block scripts }}
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds == 30) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
+{{ endblock }}

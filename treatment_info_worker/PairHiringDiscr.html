@@ -1,0 +1,541 @@
+{{ block title }}
+
+{{ endblock }}
+
+{{ block content }}
+<h4 style="color:blue"> <i> This was the decision the {{C.num_employers}} employers had to make: </i> </h4>
+<hr>
+<h3 style="text-align: center;">
+    Which of these two workers do you hire?
+</h3>
+<p style="text-align: center;"><i>(Please just click on the shape of the worker who you want to hire.)
+    </i>
+    </p>
+<hr>
+
+<form>
+<div class="profiles">
+<div class="profileleft">
+<div id="bordermiddle"></div>
+<div class="profilecontent">
+
+
+    <div class="avatar">
+    {{ if worker1_gender == "female" }}
+    <img class="avatarimg" src="{% static 'avatar_f.png' %}" />
+    {{ elif worker1_gender == "male" }}
+    <img class="avatarimg" src="{{ static 'avatar_m.png' }}" />
+    {{ endif }}
+        <div class="name">
+        <h3 style="text-align:left; vertical-align: middle; line-height:100px"> Worker A </h3>
+    </div>
+    </div>
+
+</div>
+</div>
+
+<div class="profileright">
+<div class="profilecontent">
+
+    <div class="avatar">
+    {{ if worker2_gender == "female" }}
+    <img class="avatarimg" src="{% static 'avatar_f.png' %}" />
+    {{ elif worker2_gender == "male" }}
+    <img class="avatarimg" src="{% static 'avatar_m.png' %}" />
+    {{ endif }}
+    <div class="name">
+        <h3 style="text-align:left; vertical-align: middle; line-height:100px"> Worker B </h3>
+    </div>
+    </div>
+
+</div>
+</div>
+</div>
+</form>
+
+<table style="width: 100%;" id="Table">
+    <!--
+    <thead>
+        <tr>
+            <th> </th>
+            <th><u>ATTRIBUTES:</u></th>
+            <th> </th>
+        </tr>
+    </thead>
+    -->
+    <tr>
+        <td> {{ worker1_gender}} </td>
+        <td> GENDER </td>
+        <td> {{ worker2_gender}} </td>
+    </tr>
+    <tr>
+        <td> {{worker1_race}} </td>
+        <td> RACE </td>
+        <td> {{worker2_race}} </td>
+    </tr>
+    <tr>
+        <td> {{worker1_agegroup}} </td>
+        <td> AGE </td>
+        <td> {{worker2_agegroup}} </td>
+</table>
+<br>
+<hr>
+<p style="color:blue; font-size:18px"> In this case, the employer has chosen the other worker (Worker B). </p>
+<hr>
+
+{{ if treatment == 1 or treatment == 2}}
+<p id="container"> Click "Next" to see how often the {{C.num_employers}} employers have chosen either you or the other worker.<br>
+<b class="openbox" id="openbox">
+     <button type="button" class="button"> Next </button>
+</b> </p>
+{{ elif treatment == 4}}
+<p id="container"> Click "Next" to see how often the {{C.num_decisions_pc}} randomly generated decisions (by a PC) have
+    selected either ou or the other worker.
+<b class="openbox" id="openbox">
+     <button type="button" class="button"> Next </button>
+</b> </p>
+{{ elif treatment == 3}}
+<p id="container">
+<b class="openbox" id="openbox">
+     <button type="button" class="button"> Next </button>
+</b> </p>
+{{ endif }}
+
+<!-- <p id="container"> Click "next" to see how often the {{C.num_employers}} employers have chosen you or the other worker.</p> -->
+
+<div class="infobox hidden" id="infobox">
+
+<p style="font-size:18px"> The {{C.num_employers}} employers decided the following: </p>
+<div class="decision_discr" style="font-weight:bold; text-align:center">
+    <table width="100%" style="font-size:25px;">
+        <thead >
+        <tr>
+            <th width="30%"> YOU </th>
+            <th width="40%" style="text-align:center"> EMPLOYERS' CHOICES: </th>
+            <th width="30%"> WORKER B </th>
+        </tr>
+    </thead>
+        <tr style=font-size:30px;" >
+            <td style="color:green; text-align:center" width="30%"> {{ hiring_decision_pro }} / {{C.num_employers}} </td>
+            <td width="40%"> </td>
+            <td style="color:red; text-align:center" width="30%"> {{ hiring_decision_con }} / {{C.num_employers}} </td>
+        </tr>
+    </table>
+</div>
+<br>
+<div class = "barchart">
+    <div class="container">
+        <div class = "barpart">
+		<div class="bar1" style="width: {{hiring_decision_pro_pc}}%; text-align: center"> {{hiring_decision_pro_pc}}% </div>
+		<div class="bar2" style="width: {{hiring_decision_con_pc}}%; text-align:center"> {{hiring_decision_con_pc}}% </div>
+        </div>
+	</div>
+    <br>
+</div>
+<br> <br>
+    <p style="font-size:18px"> Out of the {{C.num_employers}} employers that were confronted with the decision between you and your competitor,
+     <b> {{ hiring_decision_pro }} </b> employer(s) selected you and <b> {{ hiring_decision_con }} </b> employer(s) selected your competitor
+        for the task. <br>
+        </p>
+    <p style="font-size:18px">
+
+        {{ if hiring_decision_pro > hiring_decision_con }}
+        You earn {{ bonus_pre_hiring }} for being selected by more than half of the employers for the task.
+        {{ elif hiring_decision_pro < hiring_decision_con }}
+        Since you were selected by less than half of the employers, you will <b> not </b> receive a bonus for that. (Test: {{ bonus_pre_hiring }})
+        {{ elif hiring_decision_pro == hiring_decision_con }}
+        Since exactly half of the employers selected you, we determined randomly whether you receive a bonus or not with the result
+        of you getting {{ bonus_pre_hiring }}.
+        {{ endif }}
+    </p>
+    <br> <br>
+    <div class="center">
+    {{ next_button }}
+    </div>
+    <br>
+    </div> <br>
+<br>
+<!--
+    <br>
+    <div class="center">
+    {{ next_button }}
+    </div>
+    <br> -->
+
+<div class="arrow-box">
+  <div class="arrow" style="color:blue"></div>
+  <div class="description"> You </div>
+</div>
+
+<input type="hidden" name="worker1_id" value="{{worker1_id}}" id="worker1_id"/>
+<input type="hidden" name="worker2_id" value="{{worker2_id}}" id="worker2_id"/>
+<input type="hidden" name="worker1_agegroup" value="{{worker1_agegroup}}" id="worker1_agegroup"/>
+<input type="hidden" name="worker2_agegroup" value="{{worker2_agegroup}}" id="worker2_agegroup"/>
+<input type="hidden" name="worker1_race" value="{{worker1_race}}" id="worker1_race"/>
+<input type="hidden" name="worker2_race" value="{{worker2_race}}" id="worker2_race"/>
+<input type="hidden" name="worker1_gender" value="{{worker1_gender}}" id="worker1_gender"/>
+<input type="hidden" name="worker2_gender" value="{{worker2_gender}}" id="worker2_gender"/>
+
+{{ formfield_errors 'worker1_id' }}
+{{ formfield_errors 'worker2_id' }}
+{{ formfield_errors 'worker1_agegroup' }}
+{{ formfield_errors 'worker2_agegroup' }}
+{{ formfield_errors 'worker1_gender' }}
+{{ formfield_errors 'worker2_gender' }}
+{{ formfield_errors 'worker1_race' }}
+{{ formfield_errors 'worker2_race' }}
+
+
+    {{ endblock }}
+
+
+{{ block styles }}
+<link href="{% static 'global/custom.css' %}" rel="stylesheet">
+<style type="text/css">
+
+#Table td
+{
+    text-align: center;
+    vertical-align: middle;
+    font-size:22px;
+    font-weight: bold;
+    width: 33%;
+}
+
+#Table th
+{
+    text-align: center;
+    vertical-align: middle;
+    font-size:22px;
+    // border-bottom: 1px solid #ddd;
+}
+
+.hidden {
+	display:none;
+}
+
+.infobox {
+    background-color:#f0f0f5
+    }
+
+.openbox {
+        cursor: pointer;
+		margin: 15px 0;
+		  }
+
+.button{
+    background-color: #3393FF;
+    border: none;
+    border-radius: 7px;
+    color: white;
+    padding: 7px 14px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 2px;
+    cursor: pointer;
+    position: relative;
+}
+
+		.bar-chart {
+			display: flex;
+			flex-direction: row;
+			align-items: center;
+			justify-content: flex-start;
+			margin: 20px auto;
+			max-width: 600px;
+			height: 40px;
+			border: 1px solid black;
+		}
+
+		.bar1 {
+			background-color: green;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			color: white;
+			text-align: right;
+			width: 0%;
+			transition: width 1s ease-in-out;
+			display: inline-block;
+			float: left;
+			box-sizing: border-box;
+		}
+
+		.bar2 {
+			background-color: red;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			color: white;
+			text-align: right;
+			width: 0%;
+			transition: width 1s ease-in-out;
+			display: inline-block;
+			float: left;
+			box-sizing: border-box;
+		}
+
+		.bar-part {
+			background-color: #008CBA;
+			height: 100%;
+			margin: 0;
+			padding: 0;
+			color: white;
+			text-align: center;
+			width: 0%;
+			transition: width 1s ease-in-out;
+			display: inline-block;
+			float: left;
+			box-sizing: border-box;
+		}
+
+
+#content{
+  width:100%;
+  heigth:500px;
+  margin 0 10% 0 10%;
+}
+
+.center {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 50px;
+}
+.compare{
+  float:left;
+  width:45%;
+  margin-left:2.5%;
+  margin-right:2.5%;
+}
+
+.pictures{
+  max-width:100%;
+  heigth:auto;
+}
+
+label > input{ /* HIDE RADIO */
+  visibility: hidden; /* Makes input not-clickable */
+  position: absolute; /* Remove input from document flow */
+}
+label > input + .avatar{ /* IMAGE STYLES */
+  cursor:pointer;
+  border:8px solid transparent;
+}
+label > input:checked + .avatar{ /* (RADIO CHECKED) IMAGE STYLES */
+  border:8px solid #008000;
+}
+
+
+    .vertical-line{
+        height: 50%;
+        }
+
+    .profiles{
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+     }
+
+    .profiles .profileleft{
+        border-right: 2px solid gray;
+        height: 100%;
+        width: 50%;
+        overflow: hidden;
+        float: left;
+        padding-right: 30px;
+    }
+
+
+    .profiles .profileright{
+        height: 100%;
+        width: 50%;
+        overflow: hidden;
+        float:right;
+        padding-left: 30px;
+        /* border:8px solid #008000; */
+    }
+
+    .profilecontent{
+        position: relative;
+        height: 100%;
+        width: 100%;
+        overflow: hidden;
+    }
+
+    .profileright .profilecontent .avatar{
+        position:relative;
+        float: left;
+        width: 442px;
+        height: 130px;
+        margin-left: 0px;
+        border:8px solid #008000;
+    }
+
+    .profileleft .profilecontent .avatar{
+        position:relative;
+        float: left;
+        width: 442px;
+        height: 130px;
+        margin-left: 0px;
+    }
+
+    .avatar .avatarimg{
+        position: relative;
+        width: 100x;
+        height: 100%;
+        float:left;
+        overflow: hidden;
+    }
+
+    .avatar .name{
+        position: relative;
+        width: 60%;
+        height: 150px;
+        float: left;
+        margin-top:1%;
+        margin-left: 20px;
+        }
+
+    .divBox{
+        margin-top: 80px;
+        margin-bottom: 5px;
+    }
+
+    .display{
+        visibility: visible;
+        }
+
+    .label{
+        font-size: 1.5rem;
+        float: left;
+        position:relative;
+        }
+
+    .max{
+        color: #2db92d;
+        font-weight: bold;
+        }
+
+    .min{
+        color: #CD5C5C;
+        font-weight: bold;
+        }
+
+    .equal{
+        font-weight: normal;
+        }
+
+    .info {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black;
+        }
+
+    .info .infotext {
+        visibility: hidden;
+        width: 500px;
+        background-color: black;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        top: -50px;
+        left: 150%;
+        font-family: -apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif,"Apple Color Emoji","Segoe UI Emoji","Segoe UI Symbol";
+        font-size: 0.9rem;
+        font-weight: 400;
+        line-height:130%
+    }
+
+    .info .infotext::after {
+        content: "";
+        position: absolute;
+        top: 50%;
+        right: 100%;
+        margin-top: -5px;
+        border-width: 5px;
+        border-style: solid;
+        border-color: transparent black transparent transparent;
+
+        }
+
+    .info:hover .infotext {
+        visibility: visible;
+        }
+
+
+    .arrow-box {
+        position: absolute;
+        top: 200px;
+        left: 260px;
+        }
+
+    .arrow {
+        width: 0;
+        height: 0;
+        border-top: 25px solid transparent;
+        border-bottom: 25px solid transparent;
+        border-left: 25px solid blue;
+        transform: rotate(40deg);
+        }
+
+    .description {
+        background-color: transparent;
+        color: blue;
+        padding: 10px;
+        position: absolute;
+        top: -60px;
+        left: -70px;
+        z-index: 1;
+        margin-right: 10px;
+        font-size: 26px;
+        font-weight: bold;
+    }
+
+    .arrow-box .arrow::before {
+  content: "";
+  width: 60px;
+  height: 3px;
+  position: absolute;
+  bottom: 50%;
+  right: 100%;
+  background-color: blue;
+}
+
+.otree-timer {
+    display: none;
+}
+
+</style>
+{% endblock %}
+
+
+{% block scripts %}
+<script src="{% static 'prev_next_button.js' %}"></script>
+<script src="https://kit.fontawesome.com/291f047144.js" crossorigin="anonymous"></script>
+
+<script>
+    document.getElementById("openbox").addEventListener("click", function(){
+    document.getElementById("infobox").classList.remove("hidden");
+    document.getElementById("container").classList.add("hidden");
+        });
+</script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function (event) {
+        $('.otree-timer__time-left').on('update.countdown', function (event) {
+            if (event.offset.totalSeconds == 30) {
+                $('.otree-timer').show();
+            }
+        });
+    });
+</script>
+
+{% endblock %}
+
+

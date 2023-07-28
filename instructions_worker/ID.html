@@ -1,0 +1,39 @@
+{{ block title }}
+First Questions
+{{ endblock }}
+{{ block content }}
+
+       {{  formfield 'prolificid' }}
+
+<hr>
+<br>
+<div>
+    <b> How old are you? </b> </td>
+<table>
+     <tr>
+        <td style="width:60px"> <input type="number" min="0" max="100" name="age" id="age" class="form-control"> </td>
+        <td> &nbsp; </td>
+        <td> years </td>
+    </tr>
+</table> <br>
+
+
+
+
+    {{ formfield 'gender' }}
+    {{ formfield 'race' }}
+
+</div>
+
+<br>
+    {{ next_button }}
+
+{{ endblock }}
+
+{{ block styles }}
+<style>
+.otree-timer {
+    display: none;
+}
+</style>
+{{ endblock }}
