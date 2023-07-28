@@ -11,8 +11,8 @@ You have completed Part I of the experiment. Now Part II begins.
 <hr>
 <h5> Background: </h5>
 <p>
-    In another experiment, {{C.num_employers}} participants play the role of 'employers' and are shown two profiles of 'workers' consisting of the workers' gender, age, and race.
-    Based on this, they are asked to select one of these workers to do a task for them.
+    In another experiment, {{C.num_employers}} participants have played the role of 'employers' and were shown two profiles of 'workers' consisting of the workers' gender, age, and race.
+    Based on this, they were asked to select one of these workers to do a task for them.
     In particular, the employers were told that they would receive a bonus if the worker they selected scored higher in the previous sequences task than the worker they did not select.
 </p>
 <h5> Part II: </h5>
@@ -21,17 +21,17 @@ You have completed Part I of the experiment. Now Part II begins.
 </p>
 
 <p>
-    This means, you have been matched to another worker (your opponent) and several employers have decided whether or not to select you or the other worker.
+    This means, you have been matched to another worker (your opponent) and {{C.num_employers}} employers have decided whether or not to select you or the other worker.
     Thereby, employers have only seen information about your and your oppenent's gender, age, and race.
 </p>
 <p>
-    Some of the employers' selection decisions were made by a computer instead of real participants. In this case, the computer took over the role of the employer and randomly selected either you or your opponent.
-    You will be informed about the decisions of the employers that were presented with your and your opponents profile in the next step and whether these decisions were made by real participants or by the computer.
+    The selection decisions also have direct payoff consequences for you as you will receive a bonus payment, depending on how often you have been selected.
+    If you got selected by more than {{C.pre_threshold_bonus }} employers, you will receive a bonus payment of {{C.pre_hiring_bonus}}. Otherwise, you receive nothing.
+    If you got selected by exactly {{C.pre_threshold_bonus }} employers, it is decided randomly whether you receive the bonus or not.
 </p>
 <p>
-    The selection decisions also have direct payoff consequences for you as you will receive a bonus payment, depending on how often you have been selected.
-    If you got selected by more than {{C.pre_threshold_bonus }} employers, you will receive a bonus payment of {{C.pre_hiring_bonus}}. Otherwise, you receive nothing. If you got selected by exactly {{C.pre_threshold_bonus }} employers,
-    it is decided randomly whether you receive the bonus or not.
+    Some of the employers' selection decisions were made by a computer instead of real participants. In this case, the computer took over the role of the employer and randomly selected either you or your opponent.
+    You will be informed about the decisions of the employers that were presented with your and your opponent's profile in the next step and whether these decisions were made by real participants or by the computer.
 </p>
 <p>
     On the next page, you will see how the selection decision between you and your opponent looked like.
